@@ -1,4 +1,4 @@
 Bubble and Merge sort with iterators and templates
 make run_bubble to compile and run bubble sort
-make run_merge to compile and run merge sort
+make run_quick to compile and run quick sort
 make clean to clean 
