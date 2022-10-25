@@ -20,7 +20,7 @@ bool comp(const typ &a, const typ &b)
 template <typename BubbleIterator>
 void bubble_sort(BubbleIterator begin, BubbleIterator end)
 {
-    for (BubbleIterator i = begin; i != std::prev(end); ++i)
+    for (BubbleIterator i = begin; i < std::prev(end); ++i)
         for (BubbleIterator j = begin; j < std::prev(end); ++j)
             if (*j > *(std::next(j)))
                 std::swap(*j, *(std::next(j)));

@@ -16,37 +16,38 @@ bool comp(const typ &a, const typ &b)
 }
 
 //quick sort without compare
-template <typename RandomIt>
-RandomIt Partition(RandomIt first, RandomIt last)
+template <typename Iterator>
+Iterator Partition(Iterator first, Iterator last)
 {
-    auto pivot = std::prev(last, 1);
+    auto pivot = std::prev(last);
     auto i = first;
-    for (auto j = first; j != pivot; ++j)
+    for (auto j = first; j < last; ++j)
     {
         // bool format
         if (*j < *pivot)
         {
-            std::swap(*i++, *j);
+            std::swap(*i, *j);
+            i++;
         }
     }
     std::swap(*i, *pivot);
     return i;
 }
 
-template <typename RandomIt>
-void quick_sort(RandomIt first, RandomIt last)
+template <typename Iterator>
+void quick_sort(Iterator first, Iterator last)
 {
     if (std::distance(first, last) > 1)
     {
-        RandomIt bound = Partition(first, last);
-        quick_sort(first, bound);
-        quick_sort(bound + 1, last);
+        Iterator pivot = Partition(first, last);
+        quick_sort(first, pivot);
+        quick_sort(pivot+1, last);
     }
 }
 
 //quick sort with compare
-template <typename RandomIt, typename Compare>
-RandomIt Partition(RandomIt first, RandomIt last, Compare compare)
+template <typename Iterator, typename Compare>
+Iterator Partition(Iterator first, Iterator last, Compare compare)
 {
     auto pivot = std::prev(last, 1);
     auto i = first;
@@ -55,21 +56,22 @@ RandomIt Partition(RandomIt first, RandomIt last, Compare compare)
         // bool format
         if (compare(*j, *pivot))
         {
-            std::swap(*i++, *j);
+            std::swap(*i, *j);
+            i++;
         }
     }
     std::swap(*i, *pivot);
     return i;
 }
 
-template <typename RandomIt, typename Compare>
-void quick_sort(RandomIt first, RandomIt last, Compare compare)
+template <typename Iterator, typename Compare>
+void quick_sort(Iterator first, Iterator last, Compare compare)
 {
     if (std::distance(first, last) > 1)
     {
-        RandomIt bound = Partition(first, last, compare);
-        quick_sort(first, bound, compare);
-        quick_sort(bound + 1, last, compare);
+        Iterator pivot = Partition(first, last, compare);
+        quick_sort(first, pivot, compare);
+        quick_sort(pivot+1, last, compare);
     }
 }
 
@@ -79,12 +81,12 @@ int main()
     unsigned seed; //seed for shuffling arrays
 
     //araray of integers
-    int a[] = {25, 262, 534, 396, 385, 237, 2, 63, 12};
+    int a[] = {3, 1, 4, 2};
     quick_sort(std::begin(a), std::end(a));
     std::cout << std::is_sorted(std::begin(a), std::end(a))<<std::endl;
 
     //vector of floats
-    std::vector<float> b = {256.333, 26.53, 267.2, 1267.73, 126.732, 173.723, 732.723, 732.125, 111, 10.5};
+    std::vector<float> b = {256.333, 26.53, 267.2, 1267.73, 25, 2222, 126.732, 173.723, 732.723, 732.125, 111, 10.5};
     quick_sort(b.begin(), b.end());
     std::cout << std::is_sorted(b.begin(), b.end())<<std::endl;
 
