@@ -1,5 +1,5 @@
 #include <iostream>     //std::cout
-#include <iterator>     //std::iterator, std::prev, std::distance
+#include <iterator>     //std::iterator, std::distance
 #include <algorithm>    //std::shuffle, std::swap, std::is_sorted
 #include <vector>       // std::vector
 #include <string>       // std::string
@@ -19,7 +19,7 @@ bool comp(const typ &a, const typ &b)
 template <typename Iterator>
 Iterator Partition(Iterator first, Iterator last)
 {
-    auto pivot = std::prev(last);
+    auto pivot = last - 1;
     auto i = first;
     for (auto j = first; j < last; ++j)
     {
@@ -49,7 +49,7 @@ void quick_sort(Iterator first, Iterator last)
 template <typename Iterator, typename Compare>
 Iterator Partition(Iterator first, Iterator last, Compare compare)
 {
-    auto pivot = std::prev(last, 1);
+    auto pivot = last - 1;
     auto i = first;
     for (auto j = first; j != pivot; ++j)
     {
