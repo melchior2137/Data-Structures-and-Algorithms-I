@@ -7,11 +7,18 @@ DIR = $(notdir $(CURDIR))
 bubble_sort.x: bubble_sort.cpp
 	$(CO) $(Cflags) -o $@ $^
 
-# Compilation and running
-.PHONY: run_bubble clean
+quick_sort.x: quick_sort.cpp
+	$(CO) $(Cflags) -o $@ $^
 
-uruchom_bubble: bubble_sort.x
+
+# Compilation and running
+.PHONY: run_bubble run_quick clean
+
+run_bubble: bubble_sort.x
 	./bubble_sort.x
+
+run_quick: quick_sort.x
+	./quick_sort.x
 
 # Cleaning
 clean:                                                     
