@@ -20,26 +20,20 @@ bool comp(const typ &a, const typ &b)
 template <typename BubbleIterator>
 void bubble_sort(BubbleIterator begin, BubbleIterator end)
 {
-    BubbleIterator i;
-    BubbleIterator j;
-
-    for (i = begin; i != end; ++i)
-        for (j = begin; j < i; ++j)
-            if (*i < *j)
-                std::swap(*i, *j);
+    for (BubbleIterator i = begin; i != std::prev(end); ++i)
+        for (BubbleIterator j = begin; j < std::prev(end); ++j)
+            if (*j > *(std::next(j)))
+                std::swap(*j, *(std::next(j)));
 }
 
 //bubble sort with custom compare function
 template <typename BubbleIterator, typename Compare>
 void bubble_sort(BubbleIterator begin, BubbleIterator end, Compare comp)
 {
-    BubbleIterator i;
-    BubbleIterator j;
-
-    for (i = begin; i != end; ++i)
-        for (j = begin; j < i; ++j)
-            if (comp(*i, *j))
-                std::swap(*i, *j);
+    for (BubbleIterator i = begin; i != std::prev(end); ++i)
+        for (BubbleIterator j = begin; j < std::prev(end); ++j)
+            if (comp(*(std::next(j)), *j))
+                std::swap(*j, *(std::next(j)));
 }
 
 int main()
